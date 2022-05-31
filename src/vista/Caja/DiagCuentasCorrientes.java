@@ -206,6 +206,12 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
             }
         ));
         jScrollPane1.setViewportView(tbVentaCobranza);
+        if (tbVentaCobranza.getColumnModel().getColumnCount() > 0) {
+            tbVentaCobranza.getColumnModel().getColumn(0).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagCuentasCorrientes.class, "DiagCuentasCorrientes.tbVentaCobranza.columnModel.title0")); // NOI18N
+            tbVentaCobranza.getColumnModel().getColumn(1).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagCuentasCorrientes.class, "DiagCuentasCorrientes.tbVentaCobranza.columnModel.title1")); // NOI18N
+            tbVentaCobranza.getColumnModel().getColumn(2).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagCuentasCorrientes.class, "DiagCuentasCorrientes.tbVentaCobranza.columnModel.title2")); // NOI18N
+            tbVentaCobranza.getColumnModel().getColumn(3).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagCuentasCorrientes.class, "DiagCuentasCorrientes.tbVentaCobranza.columnModel.title3")); // NOI18N
+        }
 
         tfTotal.setText(org.openide.util.NbBundle.getMessage(DiagCuentasCorrientes.class, "DiagCuentasCorrientes.tfTotal.text")); // NOI18N
 
@@ -1297,8 +1303,8 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
     private void cargarTablaSaldos() {
         List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes();
         cargarSaldo(saldosClientes);
-        ColorearTabla colorear = new ColorearTabla();
-        tbVentaCobranza.setDefaultRenderer(Object.class, colorear);
+        //ColorearTabla colorear = new ColorearTabla();
+        //tbVentaCobranza.setDefaultRenderer(Object.class, colorear);
     }
 
     private void cargarSaldosCliente() {

@@ -25,7 +25,7 @@ public class ConexionFacade {
         {
 
             put("javax.persistence.jdbc.url", "jdbc:postgresql://localhost:5432/carniceriamb");
-            put("javax.persistence.jdbc.password", "Mb.852");
+            put("javax.persistence.jdbc.password", "postgres");
             put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
             put("javax.persistence.jdbc.user","postgres");
 
@@ -35,7 +35,7 @@ public class ConexionFacade {
         {
 
             put("javax.persistence.jdbc.url", "jdbc:postgresql://190.137.229.126:5432/carniceriamb");
-            put("javax.persistence.jdbc.password", "Db.tradici0n.159");
+            put("javax.persistence.jdbc.password", "postgres");
             put("javax.persistence.jdbc.driver", "org.postgresql.Driver");
             put("javax.persistence.jdbc.user",
                     new String(new char[]{

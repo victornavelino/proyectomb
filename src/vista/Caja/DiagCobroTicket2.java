@@ -438,11 +438,11 @@ public class DiagCobroTicket2 extends javax.swing.JDialog {
             MovimientoCajaFacade.getInstance().alta(cobroVenta);
 
             //CONSUMIMOS WEB SERVICE 
-            if (ClienteFacade.getInstance().getPersonaXDni(cobroVenta.getVenta().getDniCliente()).isFidelizado()) {
-                enviarVentaSOAP(cobroVenta);
-            }else{
-                System.out.println("no entra al web service");
-            }
+//            if (ClienteFacade.getInstance().getPersonaXDni(cobroVenta.getVenta().getDniCliente()).isFidelizado()) {
+//                enviarVentaSOAP(cobroVenta);
+//            }else{
+//                System.out.println("no entra al web service");
+//            }
             ticket.setCobroVenta(cobroVenta);
             VentaFacade.getInstance().modificar(ticket);
             JOptionPane.showMessageDialog(rootPane, "¡Cobro realizado!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
