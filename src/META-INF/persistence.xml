@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="ProyectoDosPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>entidades.inventario.ArticuloInventario</class>
+    <class>entidades.inventario.Inventario</class>
+    <class>entidades.inventario.MovimientoInterno</class>
+    <class>entidades.Sucursal</class>
+    <class>entidades.Configuracion</class>
+    <class>entidades.Paneles</class>
+    <class>entidades.articulo.Articulo</class>
+    <class>entidades.articulo.Categoria</class>
+    <class>entidades.articulo.ListaPrecio</class>
+    <class>entidades.articulo.PrecioArticulo</class>
+    <class>entidades.articulo.SubCategoria</class>
+    <class>entidades.articulo.TipoIva</class>
+    <class>entidades.articulo.UnidadMedida</class>
+    <class>entidades.caja.Caja</class>
+    <class>entidades.caja.CobranzaCtaCte</class>
+    <class>entidades.caja.CobroVenta</class>
+    <class>entidades.caja.CuentaCorriente</class>
+    <class>entidades.caja.CuponTarjeta</class>
+    <class>entidades.caja.Gasto</class>
+    <class>entidades.caja.Ingreso</class>
+    <class>entidades.caja.MovimientoCaja</class>
+    <class>entidades.caja.PlanTarjeta</class>
+    <class>entidades.caja.RetiroEfectivo</class>
+    <class>entidades.caja.Sueldo</class>
+    <class>entidades.caja.TarjetaDeCredito</class>
+    <class>entidades.caja.TipoDeFactura</class>
+    <class>entidades.caja.TipoDeGasto</class>
+    <class>entidades.caja.TipoDeIngreso</class>
+    <class>entidades.cliente.Cliente</class>
+    <class>entidades.cliente.Organismo</class>
+    <class>entidades.cliente.Persona</class>
+    <class>entidades.empleado.Empleado</class>
+    <class>entidades.empleado.TipoEmpleado</class>
+    <class>entidades.localidad.Departamento</class>
+    <class>entidades.localidad.Localidad</class>
+    <class>entidades.localidad.Provincia</class>
+    <class>entidades.persona.CorreoElectronico</class>
+    <class>entidades.persona.Domicilio</class>
+    <class>entidades.persona.Telefono</class>
+    <class>entidades.persona.TipoDocumento</class>
+    <class>entidades.persona.TipoTelefono</class>
+    <class>entidades.promocion.Promocion</class>
+    <class>entidades.promocion.PromocionArticulo</class>
+    <class>entidades.usuario.Grupo</class>
+    <class>entidades.usuario.Puesto</class>
+    <class>entidades.usuario.Usuario</class>
+    <class>entidades.venta.CierreVentas</class>
+    <class>entidades.venta.Entrega</class>
+    <class>entidades.venta.EntregaParcial</class>
+    <class>entidades.venta.OrdenDeCompra</class>
+    <class>entidades.venta.OrdenDeCompraArticulo</class>
+    <class>entidades.venta.Venta</class>
+    <class>entidades.venta.VentaArticulo</class>
+    <class>entidades.inventario.TipoInventario</class>
+    <class>entidades.inventario.NotaPedidoMedia</class>
+    <class>entidades.inventario.TipoDeMovimiento</class>
+    <class>entidades.inventario.TipoMediaRes</class>
+    <class>entidades.fidelizacion.FidelizadoNoEnviado</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/carniceria"/>
+      <property name="javax.persistence.jdbc.password" value="123654"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>

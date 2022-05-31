@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CuentasCorrientes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="ejbql">
+		<![CDATA[SELECT cc FROM CuentaCorriente cc WHERE cc.saldo<>0]]>
+	</queryString>
+	<field name="saldo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[saldo]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[recibo.id]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.util.Date">
+		<fieldDescription><![CDATA[recibo.fecha]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.cliente.razonSocial]]></fieldDescription>
+	</field>
+	<field name="puesto" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.puesto]]></fieldDescription>
+	</field>
+	<field name="sector" class="java.lang.String">
+		<fieldDescription><![CDATA[recibo.puesto.sector]]></fieldDescription>
+	</field>
+	<variable name="fecha" class="java.lang.String">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format($F{fecha})]]></initialValueExpression>
+	</variable>
+	<variable name="saldo_1" class="java.math.BigDecimal" resetType="Group" resetGroup="Cliente" calculation="Sum">
+		<variableExpression><![CDATA[$F{saldo}]]></variableExpression>
+	</variable>
+	<group name="Puesto">
+		<groupExpression><![CDATA[$F{puesto}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement x="66" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{puesto}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="14" y="0" width="52" height="20"/>
+					<textElement/>
+					<text><![CDATA[Puesto]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Cliente">
+		<groupExpression><![CDATA[$F{razonSocial}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<staticText>
+					<reportElement x="16" y="10" width="79" height="20"/>
+					<textElement>
+						<font size="12" isItalic="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Razón Social:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="11" y="4" width="531" height="1"/>
+					<graphicElement>
+						<pen lineWidth="1.0"/>
+					</graphicElement>
+				</line>
+				<textField>
+					<reportElement x="100" y="10" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{razonSocial}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="35">
+				<staticText>
+					<reportElement x="329" y="7" width="97" height="20"/>
+					<textElement>
+						<font isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[TOTAL ADEUDADO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="429" y="7" width="10" height="20"/>
+					<textElement/>
+					<text><![CDATA[$]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="439" y="7" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{saldo_1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="166" y="17" width="237" height="47"/>
+				<imageExpression class="java.lang.String"><![CDATA[this.getClass().getResource("/imagenes/telecentro.png")]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="218" y="0" width="170" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CREDITOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="16" y="10" width="52" height="20"/>
+				<textElement>
+					<font isItalic="false" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Recibo N°:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="10" width="34" height="20"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="10" width="30" height="20"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Saldo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="362" y="10" width="7" height="20"/>
+				<textElement/>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="10" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="10" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="10" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="426" y="6" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="506" y="6" width="40" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

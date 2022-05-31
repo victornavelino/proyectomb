@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ventas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cf95515a-f646-431e-9f29-383c33882977">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="ejbql">
+		<![CDATA[SELECT v FROM Venta v WHERE v.cierreVentas IS NOT NULL]]>
+	</queryString>
+	<field name="anulado" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[anulado]]></fieldDescription>
+	</field>
+	<field name="cierreVentas" class="entidades.venta.CierreVentas">
+		<fieldDescription><![CDATA[cierreVentas]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="cliente" class="entidades.cliente.Cliente">
+		<fieldDescription><![CDATA[cliente]]></fieldDescription>
+	</field>
+	<field name="cobroVenta" class="entidades.caja.CobroVenta">
+		<fieldDescription><![CDATA[cobroVenta]]></fieldDescription>
+	</field>
+	<field name="descuento" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[descuento]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.util.Date">
+		<fieldDescription><![CDATA[fecha]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[monto]]></fieldDescription>
+	</field>
+	<field name="numeroTicket" class="java.lang.Integer">
+		<fieldDescription><![CDATA[numeroTicket]]></fieldDescription>
+	</field>
+	<field name="sucursal" class="entidades.Sucursal">
+		<fieldDescription><![CDATA[sucursal]]></fieldDescription>
+	</field>
+	<field name="usuario" class="entidades.usuario.Usuario">
+		<fieldDescription><![CDATA[usuario]]></fieldDescription>
+	</field>
+	<field name="ventasArticulos" class="java.util.List">
+		<fieldDescription><![CDATA[ventasArticulos]]></fieldDescription>
+	</field>
+	<field name="nombreCompleto" class="java.lang.String">
+		<fieldDescription><![CDATA[usuario.nombreCompleto]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[sucursal.nombre]]></fieldDescription>
+	</field>
+	<title>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="207" y="4" width="146" height="20" uuid="54110631-6549-4a96-8121-13d89d5e0d52"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE VENTAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="653" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement positionType="Float" x="0" y="24" width="555" height="253" uuid="cfa424a9-7398-47d0-8a99-9fa7d7b25442"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset maxCount="9">
+					<keyExpression><![CDATA[new SimpleDateFormat("MM/dd/yyyy").format($F{fecha})]]></keyExpression>
+					<valueExpression><![CDATA[$F{monto}]]></valueExpression>
+					<labelExpression><![CDATA[$F{monto}.toString()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<barChart>
+				<chart>
+					<reportElement positionType="Float" x="0" y="281" width="555" height="145" uuid="c3aa8c69-9386-4777-9804-9c2e77e534be"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Usuarios"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nombreCompleto}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{monto}]]></valueExpression>
+						<labelExpression><![CDATA[$F{monto}.toString()]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<barChart>
+				<chart>
+					<reportElement positionType="Float" x="0" y="432" width="555" height="209" uuid="c0cdf969-4ebf-4ec2-8fd7-be692cad5a1d"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Sucursales"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nombre}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{monto}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot orientation="Horizontal">
+						<seriesColor seriesOrder="0" color="#8B37B2"/>
+						<seriesColor seriesOrder="1" color="#9EE930"/>
+						<seriesColor seriesOrder="2" color="#3488EF"/>
+						<seriesColor seriesOrder="3" color="#D1B0AB"/>
+						<seriesColor seriesOrder="4" color="#F7CC25"/>
+						<seriesColor seriesOrder="5" color="#5CC18C"/>
+						<seriesColor seriesOrder="6" color="#86FADF"/>
+						<seriesColor seriesOrder="7" color="#141A50"/>
+						<seriesColor seriesOrder="8" color="#268D29"/>
+						<seriesColor seriesOrder="9" color="#AFEAB7"/>
+						<seriesColor seriesOrder="10" color="#A26122"/>
+						<seriesColor seriesOrder="11" color="#E14C2E"/>
+						<seriesColor seriesOrder="12" color="#C947D1"/>
+						<seriesColor seriesOrder="13" color="#C535B0"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement positionType="Float" x="224" y="4" width="109" height="20" uuid="8012e193-5385-4e98-a5d4-2b8240586dcd"/>
+				<text><![CDATA[VENTAS POR FECHA]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

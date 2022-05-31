@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fechas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FECHA" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FECHA2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString language="ejbql">
+		<![CDATA[SELECT cm FROM CajaManual cm WHERE cm.fecha BETWEEN $P{FECHA} AND $P{FECHA2}]]>
+	</queryString>
+	<field name="fecha" class="java.util.Date">
+		<fieldDescription><![CDATA[fecha]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[monto]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcion]]></fieldDescription>
+	</field>
+	<field name="nombreCompleto" class="java.lang.String">
+		<fieldDescription><![CDATA[usuario.nombreCompleto]]></fieldDescription>
+	</field>
+	<field name="descripcion_1" class="java.lang.String">
+		<fieldDescription><![CDATA[puesto.descripcion]]></fieldDescription>
+	</field>
+	<field name="sector" class="java.lang.String">
+		<fieldDescription><![CDATA[puesto.sector.descripcion]]></fieldDescription>
+	</field>
+	<variable name="fecha" class="java.lang.String">
+		<variableExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format($F{fecha})]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto}]]></variableExpression>
+	</variable>
+	<variable name="fechainicio" class="java.lang.String">
+		<initialValueExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{FECHA})]]></initialValueExpression>
+	</variable>
+	<variable name="fechafin" class="java.lang.String">
+		<initialValueExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($P{FECHA2})]]></initialValueExpression>
+	</variable>
+	<variable name="monto" class="java.lang.String">
+		<variableExpression><![CDATA["\$ " + $F{monto}]]></variableExpression>
+	</variable>
+	<variable name="subtotal" class="java.math.BigDecimal" resetType="Group" resetGroup="Sector" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto}]]></variableExpression>
+	</variable>
+	<group name="Sector">
+		<groupExpression><![CDATA[$F{sector}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<staticText>
+					<reportElement x="239" y="26" width="52" height="20"/>
+					<textElement>
+						<font size="9" isItalic="false" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Descripcion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="480" y="27" width="42" height="20"/>
+					<textElement>
+						<font size="9" isItalic="false" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Puesto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="383" y="26" width="52" height="20"/>
+					<textElement>
+						<font size="9" isItalic="false" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Usuario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="28" width="52" height="20"/>
+					<textElement>
+						<font size="9" isItalic="false" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="110" y="27" width="52" height="20"/>
+					<textElement>
+						<font size="9" isItalic="false" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Monto]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="260" y="0" width="100" height="20"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{sector}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="212" y="0" width="52" height="20"/>
+					<textElement>
+						<font size="12" isBold="true" isItalic="false" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Sector]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="38">
+				<staticText>
+					<reportElement x="345" y="0" width="99" height="20"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[SUBTOTAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="455" y="0" width="15" height="20"/>
+					<textElement>
+						<font isBold="true" isItalic="false" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[$]]></text>
+				</staticText>
+				<line>
+					<reportElement x="38" y="30" width="484" height="1"/>
+				</line>
+				<textField>
+					<reportElement x="470" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$V{subtotal}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="63" splitType="Stretch">
+			<image>
+				<reportElement x="162" y="0" width="237" height="47"/>
+				<imageExpression class="java.lang.String"><![CDATA[this.getClass().getResource("/imagenes/telecentro.png")]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="-1" y="0" width="292" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORME DE INGRESO/EGRESO DE CAJA DESDE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="392" y="0" width="52" height="20"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HASTA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="283" y="0" width="101" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{fechainicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="87" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{fechafin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="193" y="0" width="167" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombreCompleto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="80" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descripcion_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{fecha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="83" height="20"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="15" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="444" y="15" width="15" height="20"/>
+				<textElement>
+					<font isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="14" width="52" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cerrarTurno" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f32664c-db88-4465-9b76-54b77aedf3da">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CAJA_ID" class="java.lang.Long"/>
+	<queryString language="ejbql">
+		<![CDATA[SELECT c FROM Caja c]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<image>
+				<reportElement x="159" y="0" width="237" height="47" uuid="f6a5f342-8ffb-4f22-a181-090c1b011a95"/>
+				<imageExpression><![CDATA[this.getClass().getResource("/imagenes/logoCarniceria1.png")]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="473" splitType="Stretch">
+			<staticText>
+				<reportElement x="331" y="10" width="100" height="20" uuid="92c15edd-dbb2-4c37-be92-5a5e4048eb42"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apertura:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="32" width="100" height="20" uuid="8957e613-fb15-4d75-a88c-980c6c8b10de"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cierre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="10" width="100" height="20" uuid="19f740ce-5ce8-4a1c-aecf-8b8a5063ba7f"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="30" width="100" height="20" uuid="92babf77-9cee-45ac-b691-f139ad70de15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sucursal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="97" width="100" height="20" uuid="627bc38d-61b7-47e1-a2aa-bc54c1a463a8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CAJA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="97" width="100" height="20" uuid="706c63ed-1740-43a1-9685-46ae842144f2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CREDITO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="132" width="100" height="20" uuid="bc9d08ea-8fae-4d4d-ace0-e64cc5e55a79"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO INICIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="132" width="100" height="20" uuid="ef1ebdfa-5e3a-4fa3-8822-7f3cae19ce8b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO INICIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="163" width="100" height="20" uuid="41670540-6269-4c96-bf10-a1883cf4db53"/>
+				<text><![CDATA[Créditos Otorgados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="203" width="100" height="20" uuid="c5407b54-fc19-40a1-b80d-b0c5285d7ca1"/>
+				<text><![CDATA[Cobro Créditos #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="342" y="238" width="126" height="20" uuid="34bcd2d5-012d-431f-8933-db55acb79eb3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO FINAL CREDITOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="453" width="134" height="20" uuid="1910fd17-2f35-496b-9463-fd36d2f813e4"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL FINAL CAJA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="183" width="100" height="20" uuid="6346cf5f-bdd5-4950-9913-674056cc1b84"/>
+				<text><![CDATA[Ventas de Tarjetas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="203" width="100" height="20" uuid="edb3dbaf-b8ea-44cf-873b-38c31d9ecd2a"/>
+				<text><![CDATA[Otros Ingresos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="163" width="100" height="20" uuid="67258b6f-f9b7-4f64-a6cb-812807a1fb2e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INGRESOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="283" width="100" height="20" uuid="3655b7bc-2c2d-461d-8a92-aaad2385aa55"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EGRESOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="335" width="100" height="20" uuid="0253b76f-dbae-47e5-8640-ee7eb3805306"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Egresos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="238" width="100" height="20" uuid="c41d46a7-f044-41a1-a629-305bd2e893e4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Ingresos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="303" width="100" height="20" uuid="0ce7c047-d01e-4c3c-9a4a-35eba1081969"/>
+				<text><![CDATA[Otros Egresos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="386" width="100" height="20" uuid="b17ab69e-3c8b-4e7e-9569-0d6423f75aa2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO CAJA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="406" width="111" height="20" uuid="796a0db3-5bd5-43b2-9747-d82b23e1853a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[COBRO CREDITOS #]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="80" width="555" height="1" uuid="e487e174-9590-4024-97f6-41dd9371a2cc"/>
+			</line>
+			<line>
+				<reportElement x="297" y="80" width="1" height="360" uuid="3f061681-d69f-407e-99b0-1e23479c8058"/>
+			</line>
+			<line>
+				<reportElement x="0" y="440" width="297" height="1" uuid="f04764cd-9a6e-4121-adfb-3b179e83444e"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>
