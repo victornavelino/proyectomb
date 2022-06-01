@@ -21,6 +21,7 @@ import entidades.venta.VentaArticulo;
 import facade.ArticuloFacade;
 import facade.CajaFacade;
 import facade.ClienteFacade;
+import facade.CuentaCorrienteFacade;
 import facade.EmpleadoFacade;
 import facade.PrecioArticuloFacade;
 import facade.PromocionFacade;
@@ -266,19 +267,20 @@ public class FrVentas extends SuperFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(ftfDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                        .addGap(82, 82, 82))
                     .addComponent(tfCliente))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel20)
-                    .addComponent(jLabel24))
+                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(tfSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
                     .addComponent(tfListaPrecio))
                 .addContainerGap())
         );
@@ -878,6 +880,16 @@ public class FrVentas extends SuperFrame {
             ftfDocumento.setText(((Persona) cliente).getDocumentoIdentidad().getNumero());
             tfCliente.setText(cliente.toString());
             tfListaPrecio.setText(cliente.getListaPrecio().getDescripcion());
+            //mostrar saldo Cuenta corriente cliente
+            List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
+            for (Object[] objects : saldosClientes) {
+                try {
+                    tfSaldo.setText(String.valueOf(objects[0]));
+                } catch (Exception e) {
+                    tfSaldo.setText("");
+                }
+            }
+
             if (cliente.getClass() == Persona.class) {
                 verificarCumpleanos((Persona) cliente);
             }
