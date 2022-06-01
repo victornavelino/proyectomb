@@ -18,6 +18,7 @@ import facade.CajaFacade;
 import facade.CierreVentasFacade;
 import facade.ClienteFacade;
 import facade.ConfiguracionFacade;
+import facade.CuentaCorrienteFacade;
 import facade.CuponTarjetaFacade;
 import facade.EmpleadoFacade;
 import facade.EntregaFacade;
@@ -120,9 +121,24 @@ public class Impresora {
         String total = new DecimalFormat("0.00").format(venta.getMonto());
         String subTotal = total;
         String descuento = "0.00";
+        String saldo = "0";
         if (venta.getDescuento() != null) {
             descuento = new DecimalFormat("0.00").format(venta.getDescuento());
             //subTotal = venta.getMonto().subtract(venta.getDescuento()).toString();
+        }
+        // saldo de cliente
+        try {
+            
+            Cliente cliente = ClienteFacade.getInstance().getPersonaXDni(venta.getDniCliente());
+            List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
+            for (Object[] objects : saldosClientes) {
+                try {
+                    saldo=String.valueOf(objects[0]);
+                } catch (Exception e) {
+                    saldo = "0";
+                }
+            }
+        } catch (Exception e) {
         }
 
         try {
@@ -139,9 +155,9 @@ public class Impresora {
             pagina.drawString("Nro: " + venta.getNumeroTicket() + "", 10, 70 + suma); //NUMERO DE RECIBO
             pagina.drawString("Vendedor: " + venta.getUsuario().getNombreCompleto(), 10, 85 + suma); //VENDEDOR
             pagina.drawString("Cliente: " + venta.getCliente(), 10, 100 + suma); //VENDEDOR
-            pagina.drawString("______________________________", 10, 105 + suma); //SEPARADOR
-
-            int salto = 115 + suma;
+            pagina.drawString("SALDO C.C CLIENTE: $ "+saldo, 10, 115 + suma);
+            pagina.drawString("______________________________", 10, 120 + suma); //SEPARADOR          
+            int salto = 130 + suma;
             BigDecimal totalComun = new BigDecimal("0.00");
             BigDecimal descuentoPromo = new BigDecimal("0.00");
             //LO NUEVO
@@ -174,8 +190,6 @@ public class Impresora {
             pagina.drawString("DESCUENTO: $ " + descuento, 10, salto += 10);
             pagina.drawString("DESC. PROMO: $ " + new DecimalFormat("0.00").format(descuentoPromo), 10, salto += 10);
             pagina.drawString("TOTAL: $ " + total, 10, salto += 10);
-//            pagina.drawString("Gracias por su compra ", 10, salto += 10);
-
             // pagina.drawString("TOTAL:", 300, salto + 10);
             //pagina.drawString("$ " + recibimos, 430, 780);
             //pagina.drawString("$ " + vuelto, 430, 790);
@@ -911,7 +925,7 @@ public class Impresora {
                     totalComun = totalComun.add((BigDecimal) articulo[6]);
                     totalIva = totalIva.add((BigDecimal) articulo[2]);
                 }
-                
+
             }
             pagina.drawString("------------------------------", 10, salto); //SEPARADOR
 //            //FIN DE LO NUEVO

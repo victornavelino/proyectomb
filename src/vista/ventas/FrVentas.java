@@ -1635,14 +1635,7 @@ public class FrVentas extends SuperFrame {
                 JOptionPane.showMessageDialog(null, "Venta realizada!");
                 limpiarCampos();
                 try {
-                    //IF AGREGADO PARA DIFERENCIAR TICKET CARNICERIA CON TICKET SANDWICHERIA
-                    if (sucursal.getNombre().contains("LA HERENCIA")) {
-                        new Impresora().imprimirTicketSandwicheria(venta);
-                        abrirCobrarTicket();
-                    } else {
-                        new Impresora().imprimir(venta);
-                    }
-
+                    new Impresora().imprimir(venta);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Error imprimiendo, compruebe impresora!");
 
