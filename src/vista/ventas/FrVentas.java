@@ -196,7 +196,6 @@ public class FrVentas extends SuperFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         cboVendedor = new javax.swing.JComboBox<>();
-        jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
 
@@ -268,7 +267,7 @@ public class FrVentas extends SuperFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(ftfDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(82, 82, 82))
                     .addComponent(tfCliente))
                 .addGap(12, 12, 12)
@@ -280,7 +279,7 @@ public class FrVentas extends SuperFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(tfSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(tfListaPrecio))
                 .addContainerGap())
         );
@@ -319,17 +318,17 @@ public class FrVentas extends SuperFrame {
         tfCodigo.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         tfCodigo.setText(org.openide.util.NbBundle.getMessage(FrVentas.class, "FrVentas.tfCodigo.text")); // NOI18N
         tfCodigo.setNextFocusableComponent(tblArticulos);
-        tfCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCodigoActionPerformed(evt);
-            }
-        });
         tfCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tfCodigoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfCodigoFocusLost(evt);
+            }
+        });
+        tfCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCodigoActionPerformed(evt);
             }
         });
 
@@ -436,7 +435,7 @@ public class FrVentas extends SuperFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(0, 139, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(tfDescripcion))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,9 +581,6 @@ public class FrVentas extends SuperFrame {
         cboVendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboVendedor.setNextFocusableComponent(ftfDocumento);
 
-        jLabel21.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jLabel21.setText(org.openide.util.NbBundle.getMessage(FrVentas.class, "FrVentas.jLabel21.text")); // NOI18N
-
         jLabel22.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel22.setText(org.openide.util.NbBundle.getMessage(FrVentas.class, "FrVentas.jLabel22.text")); // NOI18N
 
@@ -634,7 +630,7 @@ public class FrVentas extends SuperFrame {
                                         .addComponent(btnEmitirTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(39, 39, 39)
@@ -644,11 +640,10 @@ public class FrVentas extends SuperFrame {
                                 .addGap(61, 61, 61)
                                 .addComponent(jLabel18))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel21)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel22)
-                                .addGap(68, 68, 68)
-                                .addComponent(jLabel23)))
+                                .addGap(239, 239, 239)
+                                .addComponent(jLabel22)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel23)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -695,12 +690,10 @@ public class FrVentas extends SuperFrame {
                     .addComponent(jLabel11)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17)
-                    .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel22)
+                    .addComponent(jLabel18)
                     .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22)
                 .addGap(34, 34, 34))
         );
 
@@ -807,7 +800,6 @@ public class FrVentas extends SuperFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -1667,6 +1659,7 @@ public class FrVentas extends SuperFrame {
     }
 
     public void seleccionarDocumento() {
+        ftfDocumento.requestFocus();
         ftfDocumento.select(0, ftfDocumento.getText().length());
 
     }

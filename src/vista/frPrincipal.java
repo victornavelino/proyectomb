@@ -34,6 +34,7 @@ import facade.CierreVentasFacade;
 import facade.ClienteFacade;
 import facade.ConexionFacade;
 import facade.ConfiguracionFacade;
+import facade.ListaPrecioFacade;
 import facade.SucursalFacade;
 import facade.VentaFacade;
 import gnu.io.CommPortIdentifier;
@@ -95,6 +96,7 @@ import vista.inventario.FrInventario;
 import vista.TipoIva.DiagTipoIva;
 import vista.articulos.DiagAdminArticulos;
 import vista.articulos.DiagAsignarPrecios;
+import vista.articulos.DiagBuscarArticuloMenu;
 import vista.articulos.DiagCopiarPrecios;
 import vista.articulos.DiagExportarImportarArticulos;
 import vista.cliente.DiagCliente;
@@ -466,6 +468,20 @@ public class frPrincipal extends javax.swing.JFrame implements SerialPortEventLi
                 DiagAdminArticulos diagAdminArticulos = new DiagAdminArticulos(frame, true);
                 diagAdminArticulos.setLocation(Comunes.centrarDialog(diagAdminArticulos));
                 diagAdminArticulos.setVisible(true);
+            }
+
+        });
+        jXTaskPaneArticulos.add(new AbstractAction() {
+            {
+                putValue(Action.NAME, "Consultar Precio");
+                putValue(Action.SHORT_DESCRIPTION, "Consultar Precio");
+
+            }
+
+            public void actionPerformed(ActionEvent e) {
+                DiagBuscarArticuloMenu buscarArticuloMenu = new DiagBuscarArticuloMenu(frame, false, sucursal,ListaPrecioFacade.getInstance().getPorDescripcion("COMUN"));
+                buscarArticuloMenu.setLocation(Comunes.centrarDialog(buscarArticuloMenu));
+                buscarArticuloMenu.setVisible(true);
             }
 
         });

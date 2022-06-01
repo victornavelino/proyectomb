@@ -29,7 +29,7 @@ import javax.swing.table.TableColumnModel;
  *
  * @author franco
  */
-public class DiagBuscarArticulo extends SuperDialog {
+public class DiagBuscarArticuloMenu extends SuperDialog {
 
     private ModeloTablaNoEditable modeloTablaArticulos;
     private Articulo articulo;
@@ -47,9 +47,17 @@ public class DiagBuscarArticulo extends SuperDialog {
     /**
      * Creates new form DiagBuscarArticulo
      */
-    public DiagBuscarArticulo(java.awt.Frame parent, boolean modal) {
+    public DiagBuscarArticuloMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        inicializarComponentes();
+    }
+
+    public DiagBuscarArticuloMenu(java.awt.Frame parent, boolean modal, Sucursal sucursal, ListaPrecio listaPrecio) {
+        super(parent, modal);
+        initComponents();
+        this.sucursal = sucursal;
+        this.listaPrecio = listaPrecio;
         inicializarComponentes();
     }
 
@@ -76,12 +84,12 @@ public class DiagBuscarArticulo extends SuperDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.jPanel3.border.title"))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.jPanel3.border.title"))); // NOI18N
 
-        jLabel5.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.jLabel5.text")); // NOI18N
+        jLabel5.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.jLabel5.text")); // NOI18N
 
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar2.png"))); // NOI18N
-        jbBuscar.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.jbBuscar.text")); // NOI18N
+        jbBuscar.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.jbBuscar.text")); // NOI18N
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -111,16 +119,16 @@ public class DiagBuscarArticulo extends SuperDialog {
         });
         jScrollPane1.setViewportView(tblArticulos);
         if (tblArticulos.getColumnModel().getColumnCount() > 0) {
-            tblArticulos.getColumnModel().getColumn(0).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.tblArticulos.columnModel.title0")); // NOI18N
-            tblArticulos.getColumnModel().getColumn(1).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.tblArticulos.columnModel.title1")); // NOI18N
-            tblArticulos.getColumnModel().getColumn(2).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.tblArticulos.columnModel.title2")); // NOI18N
-            tblArticulos.getColumnModel().getColumn(3).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.tblArticulos.columnModel.title3")); // NOI18N
+            tblArticulos.getColumnModel().getColumn(0).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.tblArticulos.columnModel.title0")); // NOI18N
+            tblArticulos.getColumnModel().getColumn(1).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.tblArticulos.columnModel.title1")); // NOI18N
+            tblArticulos.getColumnModel().getColumn(2).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.tblArticulos.columnModel.title2")); // NOI18N
+            tblArticulos.getColumnModel().getColumn(3).setHeaderValue(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.tblArticulos.columnModel.title3")); // NOI18N
         }
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.jPanel1.border.title"))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.jPanel1.border.title"))); // NOI18N
 
         buttonGroup1.add(rbCodigo);
-        rbCodigo.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.rbCodigo.text")); // NOI18N
+        rbCodigo.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.rbCodigo.text")); // NOI18N
         rbCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbCodigoActionPerformed(evt);
@@ -128,7 +136,7 @@ public class DiagBuscarArticulo extends SuperDialog {
         });
 
         buttonGroup1.add(rbDescripcion);
-        rbDescripcion.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.rbDescripcion.text")); // NOI18N
+        rbDescripcion.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.rbDescripcion.text")); // NOI18N
         rbDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbDescripcionActionPerformed(evt);
@@ -192,7 +200,7 @@ public class DiagBuscarArticulo extends SuperDialog {
         );
 
         btnSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/accept.png"))); // NOI18N
-        btnSeleccionar.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticulo.class, "DiagBuscarArticulo.btnSeleccionar.text")); // NOI18N
+        btnSeleccionar.setText(org.openide.util.NbBundle.getMessage(DiagBuscarArticuloMenu.class, "DiagBuscarArticuloMenu.btnSeleccionar.text")); // NOI18N
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);
@@ -243,7 +251,7 @@ public class DiagBuscarArticulo extends SuperDialog {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        seleccionarArticulo();
+        this.dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void tblArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArticulosMouseClicked
@@ -282,20 +290,21 @@ public class DiagBuscarArticulo extends SuperDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DiagBuscarArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiagBuscarArticuloMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DiagBuscarArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiagBuscarArticuloMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DiagBuscarArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiagBuscarArticuloMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DiagBuscarArticulo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DiagBuscarArticuloMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DiagBuscarArticulo dialog = new DiagBuscarArticulo(new javax.swing.JFrame(), true);
+                DiagBuscarArticuloMenu dialog = new DiagBuscarArticuloMenu(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -325,6 +334,7 @@ private void cargarEncabezadosTablaArticulos(ModeloTablaNoEditable modeloTablaAr
         modeloTablaArticulos.addColumn("Código");
         modeloTablaArticulos.addColumn("Nombre");
         modeloTablaArticulos.addColumn("Descripcion");
+        modeloTablaArticulos.addColumn("Precio");
         tblArticulos.setModel(modeloTablaArticulos);
     }
 
@@ -397,11 +407,18 @@ private void cargarEncabezadosTablaArticulos(ModeloTablaNoEditable modeloTablaAr
 
     private void cargarArticulo(Articulo articulo) {
 
-        Object[] fila = new Object[4];
+        Object[] fila = new Object[5];
         fila[0] = articulo.getId();
         fila[1] = articulo.getCodigoBarra();
         fila[2] = articulo.getDescripcion();
         fila[3] = articulo.getDescripcionReducida();
+        try {
+            fila[4] = PrecioArticuloFacade.getInstance().get(articulo, listaPrecio, sucursal).getPrecio();   
+        } catch (Exception e) {
+            fila[4] = "";
+        }
+        
+
         modeloTablaArticulos.addRow(fila);
     }
 
