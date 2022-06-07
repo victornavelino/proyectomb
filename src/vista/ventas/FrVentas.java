@@ -873,15 +873,7 @@ public class FrVentas extends SuperFrame {
             tfCliente.setText(cliente.toString());
             tfListaPrecio.setText(cliente.getListaPrecio().getDescripcion());
             //mostrar saldo Cuenta corriente cliente
-            List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
-            for (Object[] objects : saldosClientes) {
-                try {
-                    tfSaldo.setText(String.valueOf(objects[0]));
-                } catch (Exception e) {
-                    tfSaldo.setText("");
-                }
-            }
-
+            cargarSaldoCliente();
             if (cliente.getClass() == Persona.class) {
                 verificarCumpleanos((Persona) cliente);
             }
@@ -916,6 +908,7 @@ public class FrVentas extends SuperFrame {
 
                 }
             }
+            cargarSaldoCliente();
             tfCliente.setText(cliente.toString());
             tfListaPrecio.setText(cliente.getListaPrecio().getDescripcion());
             tfCodigo.requestFocus();
@@ -927,6 +920,7 @@ public class FrVentas extends SuperFrame {
         } else if (diagBuscarCliente.getCliente() != null) {
             cliente = diagBuscarCliente.getCliente();
             tfCliente.setText(cliente.toString());
+            cargarSaldoCliente();
             tfCodigo.requestFocus();
             cargarTabla();
             inicilizarListas();
@@ -1901,5 +1895,16 @@ public class FrVentas extends SuperFrame {
 
     private void seleccionarContenidoDocumento() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void cargarSaldoCliente() {
+        List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
+        for (Object[] objects : saldosClientes) {
+            try {
+                tfSaldo.setText(String.valueOf(objects[0]));
+            } catch (Exception e) {
+                tfSaldo.setText("");
+            }
+        }
     }
 }
