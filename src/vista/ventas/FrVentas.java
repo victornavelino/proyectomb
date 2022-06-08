@@ -9,6 +9,7 @@ import entidades.Sucursal;
 import entidades.articulo.Articulo;
 import entidades.articulo.PrecioArticulo;
 import entidades.caja.Caja;
+import entidades.caja.CuentaCorriente;
 import entidades.cliente.Cliente;
 import entidades.cliente.Organismo;
 import entidades.cliente.Persona;
@@ -702,6 +703,7 @@ public class FrVentas extends SuperFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ftfDocumentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfDocumentoActionPerformed
+        tfSaldo.setText("");
         cumpleanos = false;
         limpiarCamposArticulo();
         tfTotal.setText("");
@@ -767,6 +769,7 @@ public class FrVentas extends SuperFrame {
     }//GEN-LAST:event_tfCantidadActionPerformed
 
     private void ftfDocumentoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ftfDocumentoFocusGained
+        tfSaldo.setText("");
         ftfDocumento.select(0, ftfDocumento.getText().length());
     }//GEN-LAST:event_ftfDocumentoFocusGained
 
@@ -885,6 +888,7 @@ public class FrVentas extends SuperFrame {
     }
 
     private void buscarCliente() {
+        tfSaldo.setText("");
         limpiarCamposArticulo();
         tfTotal.setText("");
         tfSubtotalGral.setText("");
@@ -1642,10 +1646,11 @@ public class FrVentas extends SuperFrame {
         } else {
             JOptionPane.showMessageDialog(null, "La caja se cerro durante la venta. Debe abrir la caja");
         }
-
+        tfSaldo.setText("");
     }
 
     public void seleccionarDocumento() {
+        tfSaldo.setText("");
         ftfDocumento.requestFocus();
         ftfDocumento.select(0, ftfDocumento.getText().length());
 
@@ -1893,18 +1898,26 @@ public class FrVentas extends SuperFrame {
         }
     }
 
-    private void seleccionarContenidoDocumento() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     private void cargarSaldoCliente() {
         List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
-        for (Object[] objects : saldosClientes) {
-            try {
-                tfSaldo.setText(String.valueOf(objects[0]));
-            } catch (Exception e) {
-                tfSaldo.setText("");
+        if (clienteTieneCuentaCorriente(cliente)) {
+            for (Object[] objects : saldosClientes) {
+                try {
+                    tfSaldo.setText(String.valueOf(objects[0]));
+                } catch (Exception e) {
+                    tfSaldo.setText("");
+                }
             }
+        }else{
+            tfSaldo.setText("");
         }
+
     }
+
+    private boolean clienteTieneCuentaCorriente(Cliente cliente) {
+        List<CuentaCorriente> listaCuentas = CuentaCorrienteFacade.getInstance().getCuentasCCliente(cliente);
+        return !listaCuentas.isEmpty();
+    }
+
 }
