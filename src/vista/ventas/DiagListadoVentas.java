@@ -339,14 +339,10 @@ public class DiagListadoVentas extends javax.swing.JDialog {
             modeloTablaVentas = new ModeloTablaNoEditable();
             cargarEncabezadosTablaArticulos(modeloTablaVentas);
             for (Venta venta : ventas) {
-                if (sucursal.getNombre().equals("CENTRAL")) {
-                    //SI ES CENTRAL CARGAR VENTAS 
-                    cargarVenta(venta);
-                } else {
                     for (VentaArticulo ventaArticulo : venta.getVentasArticulos()) {
                         cargarVenta(venta, ventaArticulo);
                     }
-                }
+                
 
             }
 
