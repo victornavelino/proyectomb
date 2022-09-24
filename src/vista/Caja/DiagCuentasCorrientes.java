@@ -126,6 +126,7 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
         ftfDocumentoSaldo = new javax.swing.JFormattedTextField();
         btnBuscarClienteSaldo = new javax.swing.JButton();
         tfClienteSaldo = new javax.swing.JTextField();
+        btnExportarCC = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbSaldosClientes = new javax.swing.JTable();
 
@@ -444,6 +445,14 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
 
         tfClienteSaldo.setText(org.openide.util.NbBundle.getMessage(DiagCuentasCorrientes.class, "DiagCuentasCorrientes.tfClienteSaldo.text")); // NOI18N
 
+        btnExportarCC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/save.png"))); // NOI18N
+        btnExportarCC.setText(org.openide.util.NbBundle.getMessage(DiagCuentasCorrientes.class, "DiagCuentasCorrientes.btnExportarCC.text")); // NOI18N
+        btnExportarCC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarCCActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnCliente1Layout = new javax.swing.GroupLayout(pnCliente1);
         pnCliente1.setLayout(pnCliente1Layout);
         pnCliente1Layout.setHorizontalGroup(
@@ -458,19 +467,24 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
                         .addComponent(ftfDocumentoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBuscarClienteSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(btnExportarCC)
+                .addGap(35, 35, 35))
         );
         pnCliente1Layout.setVerticalGroup(
             pnCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCliente1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBuscarClienteSaldo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ftfDocumentoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfClienteSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnExportarCC)
+                    .addGroup(pnCliente1Layout.createSequentialGroup()
+                        .addGroup(pnCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBuscarClienteSaldo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnCliente1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(ftfDocumentoSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfClienteSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -493,10 +507,10 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
-                    .addComponent(pnCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(42, 42, 42))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,8 +518,8 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(DiagCuentasCorrientes.class, "DiagCuentasCorrientes.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
@@ -616,6 +630,10 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
         exportarCuentaCorriente();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnExportarCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarCCActionPerformed
+        exportarSaldosClientesCC();
+    }//GEN-LAST:event_btnExportarCCActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -664,6 +682,7 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
     private javax.swing.JButton btnBuscarClienteSaldo;
     private javax.swing.JButton btnCobranza;
     private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnExportarCC;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox cbCobranzas;
     private javax.swing.JCheckBox cbVentas;
@@ -1540,5 +1559,13 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "No se puede Exportar tabla vacia!");
         }
 
+    }
+
+    private void exportarSaldosClientesCC() {
+        if (tbSaldosClientes.getRowCount() > 0) {
+            new ExportarExcel().crearExcelJtable(tbSaldosClientes, "Listado Saldos Cuenta Corriente Clientes");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede Exportar tabla vacia!");
+        }
     }
 }
