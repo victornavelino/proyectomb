@@ -652,7 +652,7 @@ public class DiagExportarImportarVentas extends javax.swing.JDialog {
                     //System.out.println("paso");
                     venta.setMonto(new BigDecimal((String) tblVentas.getValueAt(i, 4)));
 
-                    venta.setNumeroTicket((int) tblVentas.getValueAt(i, 5));
+                    venta.setNumeroTicket((Long) tblVentas.getValueAt(i, 5));
 
                     //Si es Persona
                     if (!tblVentas.getValueAt(i, 8).equals("null")) {

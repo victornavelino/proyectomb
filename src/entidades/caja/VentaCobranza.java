@@ -25,7 +25,7 @@ public class VentaCobranza implements Comparator {
     private Date fecha;
     private BigDecimal importe;
     private BigDecimal importeSaldo;
-    private int numero;
+    private Long numero;
     private BigDecimal saldoAcumulado;
     private String observaciones;
 //Franquito: get y set objeto
@@ -72,11 +72,11 @@ public class VentaCobranza implements Comparator {
         this.importeSaldo = importeSaldo;
     }
 
-    public int getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(Long numero) {
         this.numero = numero;
     }
 

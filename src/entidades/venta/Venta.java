@@ -37,10 +37,7 @@ import javax.persistence.Temporal;
 public class Venta implements Serializable, Comparator {
     @OneToOne
     private CobroVenta cobroVenta;
-
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
     private List<VentaArticulo> ventasArticulos;
@@ -50,7 +47,9 @@ public class Venta implements Serializable, Comparator {
     @Basic(optional = false)
     @Column(scale = 3, precision = 12)
     private BigDecimal monto;
-    private int numeroTicket;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long numeroTicket;
     //** Importe del descuento que se aplica al momento de la venta
     @Column(scale = 3, precision = 12)
     private BigDecimal descuento;
@@ -85,14 +84,6 @@ public class Venta implements Serializable, Comparator {
     }
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -117,6 +108,14 @@ public class Venta implements Serializable, Comparator {
         this.ventasArticulos = ventasArticulos;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public Date getFecha() {
         return fecha;
     }
@@ -173,11 +172,11 @@ public class Venta implements Serializable, Comparator {
         this.esPersona = esPersona;
     }
     
-    public int getNumeroTicket() {
+    public Long getNumeroTicket() {
         return numeroTicket;
     }
 
-    public void setNumeroTicket(int numeroTicket) {
+    public void setNumeroTicket(Long numeroTicket) {
         this.numeroTicket = numeroTicket;
     }
 
@@ -187,7 +186,7 @@ public class Venta implements Serializable, Comparator {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (numeroTicket != null ? numeroTicket.hashCode() : 0);
         return hash;
     }
 
@@ -198,7 +197,7 @@ public class Venta implements Serializable, Comparator {
             return false;
         }
         Venta other = (Venta) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.numeroTicket == null && other.numeroTicket != null) || (this.numeroTicket != null && !this.numeroTicket.equals(other.numeroTicket))) {
             return false;
         }
         return true;
@@ -206,7 +205,7 @@ public class Venta implements Serializable, Comparator {
 
     @Override
     public String toString() {
-        return "entidades.venta.Venta[ id=" + id + " ]";
+        return "entidades.venta.Venta[ id=" + numeroTicket + " ]";
     }
         @Override
     public int compare(Object o1, Object o2) {

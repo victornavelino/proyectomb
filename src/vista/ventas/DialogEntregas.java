@@ -765,7 +765,7 @@ public class DialogEntregas extends SuperDialog {
             } catch (NumberFormatException numberFormatException) {
             }
             venta.setVentasArticulos(listaVentaArticulos);
-            venta.setNumeroTicket(VentaFacade.getInstance().getUltimoNumeroTicket() + 1);
+            //venta.setNumeroTicket(VentaFacade.getInstance().getUltimoNumeroTicket() + 1);
             if (cliente.getClass() == Persona.class) {
                 //ES PERSONA
                 venta.setCliente(((Persona) cliente).toString());
