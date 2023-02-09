@@ -185,8 +185,8 @@ public class DiagAnularVenta extends javax.swing.JDialog {
         try {
 
             List<Object> listaVentas = VentaFacade.getInstance().listaVentasDescendente();
-            int ticket;
-            ticket = (int) listaVentas.get(0);
+            Long ticket;
+            ticket = (Long) listaVentas.get(0);
             tfNumeroTicket.setText(String.valueOf(ticket));
         } catch (Exception e) {
             System.out.println("salio catch");

@@ -193,7 +193,8 @@ public class DiagReimprimirTicket extends javax.swing.JDialog {
         try {
             tfNumeroTIcket.setText(String.valueOf(VentaFacade.getInstance().getUltimoNumeroTicket()));
         } catch (Exception e) {
-
+            System.out.println("eeroooooooooorrrrr");
+            System.out.println("nro: "+ VentaFacade.getInstance().getUltimoNumeroTicket());
         }
 
     }
