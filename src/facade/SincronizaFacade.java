@@ -954,7 +954,7 @@ public class SincronizaFacade {
                     } catch (Exception e) {
                     }
                     try {
-                        venta.setNumeroTicket(Long.valueOf(lista.get(i).get(5).toString()));
+                        venta.setNumeroTicket(Integer.valueOf(lista.get(i).get(5).toString()));
                     } catch (Exception e) {
                     }
                     try {

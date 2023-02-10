@@ -910,7 +910,7 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
                         vc.setFecha(ccc.getFecha());
                         vc.setImporte(ccc.getImporte());
                         vc.setImporteSaldo(ccc.getSaldoCobranza());
-                        vc.setNumero(Long.valueOf(ccc.getNumero()));
+                        vc.setNumero(ccc.getNumero());
                         vc.setObservaciones(ccc.getObservaciones());
                         listaVentaCobranza.add(vc);
                         // }
@@ -973,7 +973,7 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
                     vc.setFecha(ccc.getFecha());
                     vc.setImporte(ccc.getImporte());
                     vc.setImporteSaldo(ccc.getSaldoCobranza());
-                    vc.setNumero(Long.valueOf(ccc.getNumero()));
+                    vc.setNumero(ccc.getNumero());
                     vc.setObservaciones(ccc.getObservaciones());
                     listaVentaCobranza.add(vc);
                     // }
@@ -1056,7 +1056,7 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
                     vc.setFecha(ccc.getFecha());
                     vc.setImporte(ccc.getImporte());
                     vc.setImporteSaldo(ccc.getSaldoCobranza());
-                    vc.setNumero(Long.valueOf(ccc.getNumero()));
+                    vc.setNumero(ccc.getNumero());
                     vc.setObservaciones(ccc.getObservaciones());
                     listaVentaCobranza.add(vc);
                     // }
@@ -1149,7 +1149,7 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
                     vc.setFecha(ccc.getFecha());
                     vc.setImporte(ccc.getImporte());
                     vc.setImporteSaldo(ccc.getSaldoCobranza());
-                    vc.setNumero(Long.valueOf(ccc.getNumero()));
+                    vc.setNumero(ccc.getNumero());
                     vc.setObservaciones(ccc.getObservaciones());
                     listaVentaCobranza.add(vc);
                     // }
@@ -1252,7 +1252,7 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
                         vc.setFecha(ccc.getFecha());
                         vc.setImporte(ccc.getImporte());
                         vc.setImporteSaldo(ccc.getSaldoCobranza());
-                        vc.setNumero(Long.valueOf(ccc.getNumero()));
+                        vc.setNumero(ccc.getNumero());
                         vc.setObservaciones(ccc.getObservaciones());
                         //Franquito: aca hacer vc.setObjeto(cc); // hacer eso en todas las listas que cargan la tabla
                         listaVentaCobranza.add(vc);

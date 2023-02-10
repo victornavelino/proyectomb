@@ -1598,7 +1598,7 @@ public class FrVentas extends SuperFrame {
                 venta.setFecha(Comunes.obtenerFechaActualDesdeDB());
                 venta.setMonto(total);
                 venta.setVentasArticulos(listaVentaArticulos);
-                //venta.setNumeroTicket(VentaFacade.getInstance().getUltimoNumeroTicket() + 1);
+                
                 //verificamos si es empleado para setear el % de descuento
 //            if (cliente.getClass() == Persona.class) {
 //                if (EmpleadoFacade.getInstance().existeEmpleadoCliente(cliente)) {
@@ -1626,9 +1626,10 @@ public class FrVentas extends SuperFrame {
                     }
                     venta.setEsPersona(false);
                 }
-
                 venta.setUsuario((Usuario) cboVendedor.getSelectedItem());
                 venta.setSucursal(sucursal);
+                venta.setNumeroTicket(VentaFacade.getInstance().getUltimoNumeroTicket());
+            
                 VentaFacade.getInstance().alta(venta);
                 JOptionPane.showMessageDialog(null, "Venta realizada!");
                 limpiarCampos();

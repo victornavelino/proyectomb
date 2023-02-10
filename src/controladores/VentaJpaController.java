@@ -56,7 +56,7 @@ public class VentaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = venta.getNumeroTicket();
+                Long id = venta.getId();
                 if (findVenta(id) == null) {
                     throw new NonexistentEntityException("The venta with id " + id + " no longer exists.");
                 }

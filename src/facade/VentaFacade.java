@@ -367,15 +367,16 @@ public class VentaFacade {
 
     }
 
-    public Long getUltimoNumeroTicket() {
+    public int getUltimoNumeroTicket() {
         EntityManagerFactory emfa = Persistence.createEntityManagerFactory("ProyectoDosPU", ConexionFacade.PROPIEDADES);
         EntityManager ema = emfa.createEntityManager();
         Query quBuscar = ema.createQuery("SELECT MAX(v.numeroTicket) FROM Venta v");
         quBuscar.setMaxResults(1);
+        ema.getEntityManagerFactory().getCache().evictAll();
         try {
-            return (Long) quBuscar.getSingleResult();
+            return (int) quBuscar.getSingleResult();
         } catch (Exception e) {
-            return 0L;
+            return 0;
         }
     }
 
