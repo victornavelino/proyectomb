@@ -61,6 +61,7 @@ import javax.swing.KeyStroke;
 import javax.swing.Timer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import vista.Caja.DiagCobroTicket2;
 import vista.articulos.DiagBuscarArticulo;
 import vista.frPrincipal;
@@ -1598,7 +1599,7 @@ public class FrVentas extends SuperFrame {
                 venta.setFecha(Comunes.obtenerFechaActualDesdeDB());
                 venta.setMonto(total);
                 venta.setVentasArticulos(listaVentaArticulos);
-                
+
                 //verificamos si es empleado para setear el % de descuento
 //            if (cliente.getClass() == Persona.class) {
 //                if (EmpleadoFacade.getInstance().existeEmpleadoCliente(cliente)) {
@@ -1628,20 +1629,23 @@ public class FrVentas extends SuperFrame {
                 }
                 venta.setUsuario((Usuario) cboVendedor.getSelectedItem());
                 venta.setSucursal(sucursal);
-                venta.setNumeroTicket(VentaFacade.getInstance().getUltimoNumeroTicket());
-            
-                VentaFacade.getInstance().alta(venta);
-                JOptionPane.showMessageDialog(null, "Venta realizada!");
-                limpiarCampos();
                 try {
-                    new Impresora().imprimir(venta);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error imprimiendo, compruebe impresora!");
+                    venta.setNumeroTicket(VentaFacade.getInstance().getUltimoNumeroTicket());
+                    VentaFacade.getInstance().alta(venta);
+                    JOptionPane.showMessageDialog(null, "Venta realizada!");
+                    limpiarCampos();
+                    try {
+                        new Impresora().imprimir(venta);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error imprimiendo, compruebe impresora!");
 
+                    }
+                    KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(keyDispaycher);
+                    keyDispaycher = null;
+                    eventosDeTeclas();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "ERROR AL GENERAR EL NUMERO DE TICKET \n"+ e.getMessage());
                 }
-                KeyboardFocusManager.getCurrentKeyboardFocusManager().removeKeyEventDispatcher(keyDispaycher);
-                keyDispaycher = null;
-                eventosDeTeclas();
 
             }
         } else {
@@ -1899,7 +1903,6 @@ public class FrVentas extends SuperFrame {
         }
     }
 
-
     private void cargarSaldoCliente() {
         List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
         if (clienteTieneCuentaCorriente(cliente)) {
@@ -1910,7 +1913,7 @@ public class FrVentas extends SuperFrame {
                     tfSaldo.setText("");
                 }
             }
-        }else{
+        } else {
             tfSaldo.setText("");
         }
 
