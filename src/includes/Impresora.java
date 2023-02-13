@@ -3,6 +3,7 @@ package includes;
 import entidades.articulo.Articulo;
 import entidades.articulo.TipoIva;
 import entidades.caja.Caja;
+import entidades.caja.CobranzaCtaCte;
 import entidades.caja.CuentaCorriente;
 import entidades.caja.CuponTarjeta;
 import entidades.caja.MovimientoCaja;
@@ -128,12 +129,12 @@ public class Impresora {
         }
         // saldo de cliente
         try {
-            
+
             Cliente cliente = ClienteFacade.getInstance().getPersonaXDni(venta.getDniCliente());
             List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
             for (Object[] objects : saldosClientes) {
                 try {
-                    saldo=String.valueOf(objects[0]);
+                    saldo = String.valueOf(objects[0]);
                 } catch (Exception e) {
                     saldo = "0";
                 }
@@ -155,7 +156,7 @@ public class Impresora {
             pagina.drawString("Nro: " + venta.getNumeroTicket() + "", 10, 70 + suma); //NUMERO DE RECIBO
             pagina.drawString("Vendedor: " + venta.getUsuario().getNombreCompleto(), 10, 85 + suma); //VENDEDOR
             pagina.drawString("Cliente: " + venta.getCliente(), 10, 100 + suma); //VENDEDOR
-            pagina.drawString("SALDO C.C CLIENTE: $ "+saldo, 10, 115 + suma);
+            pagina.drawString("SALDO C.C CLIENTE: $ " + saldo, 10, 115 + suma);
             pagina.drawString("______________________________", 10, 120 + suma); //SEPARADOR          
             int salto = 130 + suma;
             BigDecimal totalComun = new BigDecimal("0.00");
@@ -948,5 +949,50 @@ public class Impresora {
             System.out.println("LA IMPRESION HA SIDO CANCELADA..." + e);
         }
 
+    }
+
+    @SuppressWarnings("empty-statement")
+    public void imprimir(CobranzaCtaCte cobranza) {
+        //leemos los valores
+        String tipoFuente = "Dialog";
+        int tamanioFuente = 10;
+        int suma = 5;
+        try {
+            tipoFuente = configFacade.buscar("fuente").getValor();
+        } catch (Exception e) {
+        }
+        try {
+            tamanioFuente = Integer.parseInt(configFacade.buscar("tamanio").getValor());
+        } catch (NumberFormatException e) {
+        }
+        try {
+            suma = Integer.parseInt(configFacade.buscar("margensuperior").getValor());
+        } catch (NumberFormatException e) {
+        }
+        //los asignamos
+        Font fuente = new Font(tipoFuente, Font.PLAIN, tamanioFuente);
+
+        try {
+            //preparamos la pagina
+            pagina = pj.getGraphics();
+            pagina.setFont(fuente);
+            pagina.setColor(Color.black);
+            //ORIGINAL
+            pagina.drawString("MB CARNICERIA", 10, 10 + suma); //LEER DE BASE NOMBRE DEL NEGOCIO
+            pagina.drawString(cobranza.getSucursal().getNombre(), 10, 25 + suma);//SUCURSAL
+            pagina.drawString("COBRANZA C. CORRIENTE", 10, 40 + suma);//SUCURSAL DOMICILIO
+            pagina.drawString("Fecha: " + new SimpleDateFormat("dd'/'MM'/'yyyy' 'HH:mm:ss", new Locale("es_ES")).format(
+                    cobranza.getFecha()), 10, 55 + suma); //FECHA
+            pagina.drawString("Nro: " + cobranza.getNumero() + "", 10, 70 + suma); //NUMERO DE RECIBO
+            pagina.drawString("Vendedor: " + cobranza.getUsuario().getNombreCompleto(), 10, 85 + suma); //VENDEDOR
+            pagina.drawString("Cliente: " + cobranza.getCliente(), 10, 100 + suma); //VENDEDOR
+            pagina.drawString("SU PAGO: $ " + cobranza.getImporte(), 10, 115 + suma);
+            pagina.drawString("______________________________", 10, 120 + suma); //SEPARADOR
+            pagina.drawString("SALDO C.C CLIENTE: $ " + cobranza.getSaldoCobranza(), 10, 130 + suma);
+            pagina.dispose();
+            pj.end();
+        } catch (Exception e) {
+            System.out.println("LA IMPRESION HA SIDO CANCELADA..." + e);
+        }
     }
 }

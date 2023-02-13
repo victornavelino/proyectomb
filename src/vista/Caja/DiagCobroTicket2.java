@@ -436,13 +436,6 @@ public class DiagCobroTicket2 extends javax.swing.JDialog {
             cobroVenta.setFecha(Comunes.obtenerFechaActualDesdeDB());
             cobroVenta.setSucursal(sucursal);
             MovimientoCajaFacade.getInstance().alta(cobroVenta);
-
-            //CONSUMIMOS WEB SERVICE 
-//            if (ClienteFacade.getInstance().getPersonaXDni(cobroVenta.getVenta().getDniCliente()).isFidelizado()) {
-//                enviarVentaSOAP(cobroVenta);
-//            }else{
-//                System.out.println("no entra al web service");
-//            }
             ticket.setCobroVenta(cobroVenta);
             VentaFacade.getInstance().modificar(ticket);
             JOptionPane.showMessageDialog(rootPane, "¡Cobro realizado!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
@@ -452,7 +445,34 @@ public class DiagCobroTicket2 extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_btnAceptarActionPerformed
+    private void cargarSaldoCliente(Venta ticket) {
+        Cliente cliente = ClienteFacade.getInstance().getPersonaXDni(ticket.getDniCliente());
+        if (cliente != null) {
 
+            List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
+            if (clienteTieneCuentaCorriente(cliente)) {
+                for (Object[] objects : saldosClientes) {
+                    try {
+                        String sald = String.valueOf(objects[0]);
+                        BigDecimal valor = new BigDecimal(sald);
+                        BigDecimal cero = new BigDecimal(0);
+                        if (valor.compareTo(cero) >= 0) {
+                            JOptionPane.showMessageDialog(rootPane, "El cliente No posee saldo a favor para realizar \n"
+                                    + "compras en Cuenta Corriente", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                        }
+
+                    } catch (Exception e) {
+                        System.err.println("errrorrrrrrr");
+                    }
+                }
+            } 
+        }
+    }
+
+    private boolean clienteTieneCuentaCorriente(Cliente cliente) {
+        List<CuentaCorriente> listaCuentas = CuentaCorrienteFacade.getInstance().getCuentasCCliente(cliente);
+        return !listaCuentas.isEmpty();
+    }
     private void tblTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTicketsMouseClicked
         if (evt.getClickCount() == 2) {
             cobrarTicket();
@@ -845,6 +865,7 @@ public class DiagCobroTicket2 extends javax.swing.JDialog {
             tfTotal.setText(new DecimalFormat("0.00").format(saldo));
             aPagarEfectivo = ticket.getMonto();
 //            tfApagarEfectivo.setText(new DecimalFormat("0.00").format(aPagarEfectivo));
+            cargarSaldoCliente(ticket);
 
         }
         btnEfectivo.requestFocus();
@@ -1264,7 +1285,7 @@ public class DiagCobroTicket2 extends javax.swing.JDialog {
         //String strCadena = "HGM678leR54G99FFjv|30207103|Franco Zurita Perea|3834811718|414141|francozurita@gmail.com|5000|0|1|0|Franco Zurita|'14/4/1983|Masc|5/9/2019|1";
         String cadena = new String();
         System.out.println("CADENA: " + stringBuilder.toString());
-        Runnable r = new Soap(stringBuilder.toString(),cobroVenta);
+        Runnable r = new Soap(stringBuilder.toString(), cobroVenta);
         Thread t = new Thread(r);
         t.start();
     }

@@ -1630,7 +1630,7 @@ public class FrVentas extends SuperFrame {
                 venta.setUsuario((Usuario) cboVendedor.getSelectedItem());
                 venta.setSucursal(sucursal);
                 try {
-                    venta.setNumeroTicket(VentaFacade.getInstance().getUltimoNumeroTicket());
+                    venta.setNumeroTicket(VentaFacade.getInstance().getUltimoNumeroTicket()+1);
                     VentaFacade.getInstance().alta(venta);
                     JOptionPane.showMessageDialog(null, "Venta realizada!");
                     limpiarCampos();
@@ -1904,12 +1904,20 @@ public class FrVentas extends SuperFrame {
     }
 
     private void cargarSaldoCliente() {
+        String saldo;
         List<Object[]> saldosClientes = CuentaCorrienteFacade.getInstance().getSaldosClientes(cliente);
         if (clienteTieneCuentaCorriente(cliente)) {
             for (Object[] objects : saldosClientes) {
                 try {
+                    saldo = String.valueOf(objects[0]);
+                    BigDecimal valor = new BigDecimal(saldo);
+                    BigDecimal cero = new BigDecimal(0);
+                    if(valor.compareTo(cero)>=0){
+                      JOptionPane.showMessageDialog(rootPane,"El cliente No posee saldo a favor para realizar compras", "Advertencia",JOptionPane.WARNING_MESSAGE);
+                    }
                     tfSaldo.setText(String.valueOf(objects[0]));
                 } catch (Exception e) {
+                    System.err.println("errrorrrrrrr");
                     tfSaldo.setText("");
                 }
             }

@@ -24,6 +24,7 @@ import facade.SubCategoriaFacade;
 import facade.TarjetaDeCreditoFacade;
 import facade.UnidadMedidaFacade;
 import includes.Comunes;
+import includes.Impresora;
 import java.awt.HeadlessException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -392,6 +393,12 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                     MovimientoCajaFacade.getInstance().alta(cobranza);
 
                     JOptionPane.showMessageDialog(this, "Cobranza Realizada!");
+                    try {
+                        new Impresora().imprimir(cobranza);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Error imprimiendo, compruebe impresora!");
+                    }
+                    
                     this.dispose();
                 } catch (Exception e) {
                 }
@@ -526,6 +533,11 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                         MovimientoCajaFacade.getInstance().alta(cobranza);
 
                         JOptionPane.showMessageDialog(this, "Cobranza Realizada!");
+                        try {
+                            new Impresora().imprimir(cobranza);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, "Error imprimiendo, compruebe impresora!");
+                        }
                         this.dispose();
                     }
                 } catch (Exception e) {
