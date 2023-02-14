@@ -1312,7 +1312,8 @@ public class frPrincipal extends javax.swing.JFrame implements SerialPortEventLi
         jDesktopPane1.add(jScrollPane1);
         jScrollPane1.setBounds(0, 0, 990, 120);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MBCarniceria.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logogrande3.jpg"))); // NOI18N
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel1.setMaximumSize(new java.awt.Dimension(800, 700));
         jLabel1.setName("jLabel1"); // NOI18N
         jDesktopPane1.add(jLabel1);
