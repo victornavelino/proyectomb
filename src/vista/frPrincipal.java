@@ -1317,7 +1317,7 @@ public class frPrincipal extends javax.swing.JFrame implements SerialPortEventLi
         jLabel1.setMaximumSize(new java.awt.Dimension(800, 700));
         jLabel1.setName("jLabel1"); // NOI18N
         jDesktopPane1.add(jLabel1);
-        jLabel1.setBounds(50, 130, 860, 530);
+        jLabel1.setBounds(300, 130, 350, 470);
 
         jToolBar1.setRollover(true);
         jToolBar1.setName("jToolBar1"); // NOI18N

@@ -986,9 +986,8 @@ public class Impresora {
             pagina.drawString("Nro: " + cobranza.getNumero() + "", 10, 70 + suma); //NUMERO DE RECIBO
             pagina.drawString("Vendedor: " + cobranza.getUsuario().getNombreCompleto(), 10, 85 + suma); //VENDEDOR
             pagina.drawString("Cliente: " + cobranza.getCliente(), 10, 100 + suma); //VENDEDOR
-            pagina.drawString("SU PAGO: $ " + cobranza.getImporte(), 10, 115 + suma);
-            pagina.drawString("______________________________", 10, 120 + suma); //SEPARADOR
-            pagina.drawString("SALDO C.C CLIENTE: $ " + cobranza.getSaldoCobranza(), 10, 130 + suma);
+            pagina.drawString("_________________________", 10, 105 + suma); //SEPARADOR
+            pagina.drawString("SU PAGO: $ " + cobranza.getImporte(), 10, 120 + suma);
             pagina.dispose();
             pj.end();
         } catch (Exception e) {

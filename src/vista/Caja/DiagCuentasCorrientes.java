@@ -727,7 +727,7 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
         Comunes.activarComponentesPanel(pnCliente);
         Comunes.desactivarComponentesPanel(pnFechas);
         cargarComboClientes();
-        cargarTablaSaldos();
+        //cargarTablaSaldos();
         //cargarVentaCobranza();
     }
 
@@ -1427,14 +1427,19 @@ public class DiagCuentasCorrientes extends javax.swing.JDialog {
     }
 
     private void buscarClientePorDNISaldo() {
-        clienteSaldo = ClienteFacade.getInstance().getPersonaXDni(ftfDocumentoSaldo.getText());
-        if (clienteSaldo != null) {
-            ftfDocumentoSaldo.setText(((Persona) clienteSaldo).getDocumentoIdentidad().getNumero());
-            tfClienteSaldo.setText(clienteSaldo.toString());
-            cargarSaldosCliente();
-        } else {
-            buscarClienteSaldo();
+        if (!ftfDocumentoSaldo.getText().isEmpty()) {
+            clienteSaldo = ClienteFacade.getInstance().getPersonaXDni(ftfDocumentoSaldo.getText());
+            if (clienteSaldo != null) {
+                ftfDocumentoSaldo.setText(((Persona) clienteSaldo).getDocumentoIdentidad().getNumero());
+                tfClienteSaldo.setText(clienteSaldo.toString());
+                cargarSaldosCliente();
+            } else {
+                buscarClienteSaldo();
 
+            }
+
+        } else {
+               cargarTablaSaldos();
         }
 
     }
