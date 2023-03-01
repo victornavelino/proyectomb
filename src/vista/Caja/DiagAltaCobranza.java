@@ -16,6 +16,7 @@ import entidades.caja.TarjetaDeCredito;
 import entidades.cliente.Cliente;
 import entidades.usuario.Usuario;
 import facade.ClienteFacade;
+import facade.CobranzaCtaCteFacade;
 import facade.CuentaCorrienteFacade;
 import facade.CuponTarjetaFacade;
 import facade.MovimientoCajaFacade;
@@ -310,6 +311,12 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
     private void inicializarComponentes() {
         this.setTitle("Alta Cobranza");
         jLabel1.setText(client.toString());
+//        try {
+            cobranza.setNumero(CobranzaCtaCteFacade.getInstance().getUltimoNumeroTicketCobranza()+1);
+            tfNroRecibo.setText(String.valueOf(cobranza.getNumero()));
+            tfNroRecibo.setEditable(false);
+//        } catch (Exception e) {
+//        }
     }
 
     private void cargarDatosPlan() {
@@ -343,7 +350,6 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                     cobranza.setFecha(Comunes.obtenerFechaActualDesdeDB());
                     cobranza.setCliente(client);
                     cobranza.setImporte(BigDecimal.valueOf(Double.valueOf(tfMonto.getText())));
-                    cobranza.setNumero(Integer.valueOf(tfNroRecibo.getText().trim()));
                     cobranza.setObservaciones(taObservaciones.getText());
                     cobranza.setUsuario(usuario);
                     cobranza.setSucursal(sucursal);
@@ -390,6 +396,12 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                     }
                     cobranza.setSaldoCobranza(montoCobranzaTotal);
                     //ALTA DE LA COBRANZA
+                    try {
+                       cobranza.setNumero(CobranzaCtaCteFacade.getInstance().getUltimoNumeroTicketCobranza()+1); 
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Error al obtener nro de ticket de cobranza");
+                        this.dispose();
+                    }            
                     MovimientoCajaFacade.getInstance().alta(cobranza);
 
                     JOptionPane.showMessageDialog(this, "Cobranza Realizada!");

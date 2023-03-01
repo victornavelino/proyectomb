@@ -110,5 +110,17 @@ public class CobranzaCtaCteFacade {
         return quBuscar.getResultList();
     }
 
+        public int getUltimoNumeroTicketCobranza() {
+        EntityManagerFactory emfa = Persistence.createEntityManagerFactory("ProyectoDosPU", ConexionFacade.PROPIEDADES);
+        EntityManager ema = emfa.createEntityManager();
+        Query quBuscar = ema.createQuery("SELECT MAX(c.numero) FROM CobranzaCtaCte c");
+        quBuscar.setMaxResults(1);
+        ema.getEntityManagerFactory().getCache().evictAll();
+        try {
+            return (int) quBuscar.getSingleResult();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
   
 }

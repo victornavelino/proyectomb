@@ -971,6 +971,7 @@ public class Impresora {
         }
         //los asignamos
         Font fuente = new Font(tipoFuente, Font.PLAIN, tamanioFuente);
+        Persona persona = ClienteFacade.getInstance().getPersonasXId(cobranza.getCliente().getId());
 
         try {
             //preparamos la pagina
@@ -983,11 +984,12 @@ public class Impresora {
             pagina.drawString("COBRANZA C. CORRIENTE", 10, 40 + suma);//SUCURSAL DOMICILIO
             pagina.drawString("Fecha: " + new SimpleDateFormat("dd'/'MM'/'yyyy' 'HH:mm:ss", new Locale("es_ES")).format(
                     cobranza.getFecha()), 10, 55 + suma); //FECHA
-            pagina.drawString("Nro: " + cobranza.getNumero() + "", 10, 70 + suma); //NUMERO DE RECIBO
+            pagina.drawString("Nro de ticket: " + cobranza.getNumero() + "", 10, 70 + suma); //NUMERO DE RECIBO
             pagina.drawString("Vendedor: " + cobranza.getUsuario().getNombreCompleto(), 10, 85 + suma); //VENDEDOR
-            pagina.drawString("Cliente: " + cobranza.getCliente(), 10, 100 + suma); //VENDEDOR
-            pagina.drawString("_________________________", 10, 105 + suma); //SEPARADOR
-            pagina.drawString("SU PAGO: $ " + cobranza.getImporte(), 10, 120 + suma);
+            pagina.drawString("Nro de Cliente: " + persona.getDocumentoIdentidad().getNumero(), 10, 100 + suma); //VENDEDOR
+            pagina.drawString("Cliente: " + cobranza.getCliente(), 10, 115 + suma); //VENDEDOR
+            pagina.drawString("_________________________", 10, 110 + suma); //SEPARADOR
+            pagina.drawString("SU PAGO: $ " + cobranza.getImporte(), 10, 125 + suma);
             pagina.dispose();
             pj.end();
         } catch (Exception e) {
