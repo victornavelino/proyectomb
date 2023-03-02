@@ -47,10 +47,11 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
     //EN LA SIGIENTE LISTA GUARDAMOS LAS COBRANZAS CUENTA CORRIENTE CON SALDO
     private List<CobranzaCtaCte> listaCobranzaCtaCte = new ArrayList<CobranzaCtaCte>();
     //GUARDAMOS LA LISTA CON LAS CONBRANZAS REALIZADAS CON TARJETA DE CREDITO
-    private List<CuponTarjeta> listaCobranzaCuponesTarjetas =new ArrayList<>();
+    private List<CuponTarjeta> listaCobranzaCuponesTarjetas = new ArrayList<>();
     //ACUMULADOR TOTAL MONTO COBRANZA
     private Usuario usuario;
     private Sucursal sucursal;
+    private int numeroTicketCC;
 
     /**
      * Creates new form DiagPlanTarjeta
@@ -312,9 +313,10 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
         this.setTitle("Alta Cobranza");
         jLabel1.setText(client.toString());
 //        try {
-            cobranza.setNumero(CobranzaCtaCteFacade.getInstance().getUltimoNumeroTicketCobranza()+1);
-            tfNroRecibo.setText(String.valueOf(cobranza.getNumero()));
-            tfNroRecibo.setEditable(false);
+
+        numeroTicketCC = CobranzaCtaCteFacade.getInstance().getUltimoNumeroTicketCobranza() + 1;
+        tfNroRecibo.setText(String.valueOf(numeroTicketCC));
+        tfNroRecibo.setEditable(false);
 //        } catch (Exception e) {
 //        }
     }
@@ -397,11 +399,11 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                     cobranza.setSaldoCobranza(montoCobranzaTotal);
                     //ALTA DE LA COBRANZA
                     try {
-                       cobranza.setNumero(CobranzaCtaCteFacade.getInstance().getUltimoNumeroTicketCobranza()+1); 
+                        cobranza.setNumero(CobranzaCtaCteFacade.getInstance().getUltimoNumeroTicketCobranza() + 1);
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Error al obtener nro de ticket de cobranza");
                         this.dispose();
-                    }            
+                    }
                     MovimientoCajaFacade.getInstance().alta(cobranza);
 
                     JOptionPane.showMessageDialog(this, "Cobranza Realizada!");
@@ -410,7 +412,7 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Error imprimiendo, compruebe impresora!");
                     }
-                    
+
                     this.dispose();
                 } catch (Exception e) {
                 }
@@ -490,7 +492,6 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                         cobranza.setFecha(Comunes.obtenerFechaActualDesdeDB());
                         cobranza.setCliente(client);
                         cobranza.setImporte(BigDecimal.valueOf(Double.valueOf(tfMonto.getText())));
-                        cobranza.setNumero(Integer.valueOf(tfNroRecibo.getText().trim()));
                         cobranza.setObservaciones(taObservaciones.getText());
                         cobranza.setUsuario(usuario);
                         cobranza.setSucursal(sucursal);
@@ -501,7 +502,7 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                         //OBTENER LISTA COBRANZAS 
                         listaCobranzaCtaCte = MovimientoCajaFacade.getInstance().getCobranzas(client);
                         //System.out.println("lista cobranza saldo segun cliente" + listaCobranzaCtaCte);
-                        
+
                         listaCobranzaCuponesTarjetas = CuponTarjetaFacade.getInstance().listarCuponesTarjetaCliente(client);
 
                         for (CobranzaCtaCte ccc : listaCobranzaCtaCte) {
@@ -509,7 +510,7 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
                             ccc.setSaldoCobranza(BigDecimal.valueOf(0.00));
                             MovimientoCajaFacade.getInstance().modificar(ccc);
                         }
-                        for (CuponTarjeta cuponTarjeta :listaCobranzaCuponesTarjetas){
+                        for (CuponTarjeta cuponTarjeta : listaCobranzaCuponesTarjetas) {
                             montoCobranzaTotal = montoCobranzaTotal.add(cuponTarjeta.getImporteCuponConRecargo());
                         }
 
@@ -541,6 +542,13 @@ public class DiagAltaCobranza extends javax.swing.JDialog {
 
                         }
                         cobranza.setSaldoCobranza(montoCobranzaTotal);
+                        try {
+                            cobranza.setNumero(CobranzaCtaCteFacade.getInstance().getUltimoNumeroTicketCobranza() + 1);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(this, "Error al obtener nro de ticket de cobranza");
+                            this.dispose();
+                        }
+
                         //ALTA DE LA COBRANZA
                         MovimientoCajaFacade.getInstance().alta(cobranza);
 
