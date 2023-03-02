@@ -163,11 +163,11 @@ public class Impresora {
                     venta.getFecha()), 10, 55 + suma); //FECHA
             pagina.drawString("Nro: " + venta.getNumeroTicket() + "", 10, 70 + suma); //NUMERO DE RECIBO
             pagina.drawString("Vendedor: " + venta.getUsuario().getNombreCompleto(), 10, 85 + suma); //VENDEDOR
-            pagina.drawString("Nro de Cliente: " + nroCliente, 10, 100 + suma); //nro cliente 
+            pagina.drawString("Nro de Ficha: " + nroCliente, 10, 100 + suma); //nro cliente 
             pagina.drawString("Cliente: " + venta.getCliente(), 10, 115 + suma); //VENDEDOR
             pagina.drawString("SALDO C.C CLIENTE: $ " + saldo, 10, 130 + suma);
-            pagina.drawString("______________________________", 10, 140 + suma); //SEPARADOR          
-            int salto = 140 + suma;
+            pagina.drawString("______________________________", 10, 135 + suma); //SEPARADOR          
+            int salto = 135 + suma;
             BigDecimal totalComun = new BigDecimal("0.00");
             BigDecimal descuentoPromo = new BigDecimal("0.00");
             //LO NUEVO
@@ -995,7 +995,7 @@ public class Impresora {
                     cobranza.getFecha()), 10, 55 + suma); //FECHA
             pagina.drawString("Nro de ticket: " + cobranza.getNumero() + "", 10, 70 + suma); //NUMERO DE RECIBO
             pagina.drawString("Vendedor: " + cobranza.getUsuario().getNombreCompleto(), 10, 85 + suma); //VENDEDOR
-            pagina.drawString("Nro de Cliente: " + persona.getDocumentoIdentidad().getNumero(), 10, 100 + suma); //nro cliente
+            pagina.drawString("Nro de Ficha: " + persona.getDocumentoIdentidad().getNumero(), 10, 100 + suma); //nro cliente
             pagina.drawString("Cliente: " + cobranza.getCliente(), 10, 115 + suma); //cliente
             pagina.drawString("_________________________", 10, 120 + suma); //SEPARADOR
             pagina.drawString("SU PAGO: $ " + cobranza.getImporte(), 10, 135 + suma);
